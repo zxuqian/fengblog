@@ -4,10 +4,11 @@ import { AppService } from './app.service';
 import {TypeOrmModule} from '@nestjs/typeorm'
 import { Connection } from 'typeorm';
 import { BlogsModule } from './blogs/blogs.module';
-import { Blog } from './blogs/blog.entity';
+import { Blog } from './blogs/entities/blog.entity';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { User } from './users/user.entity';
+import { User } from './users/entities/user.entity';
+import { CommentsModule } from './comments/comments.module';
 
 
 @Module({
@@ -24,7 +25,8 @@ import { User } from './users/user.entity';
     }),
     BlogsModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    CommentsModule
   ],
   controllers: [AppController],
   providers: [AppService],

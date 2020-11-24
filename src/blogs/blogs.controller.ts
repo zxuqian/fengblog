@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Public } from 'src/auth/auth.decorator';
-import { Blog } from './blog.entity';
+import { Blog } from './entities/blog.entity';
 import { BlogsService } from './blogs.service';
 import { CreateBlogDTO } from './dto/create-blog.dto';
 

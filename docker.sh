@@ -1,5 +1,5 @@
 # postgresql
-docker run --name postgresql-db -e POSTGRES_PASSWORD=123456 -d postgres -p 5432:5432
+docker run --name postgresql-db -e POSTGRES_PASSWORD=123456 -p 5432:5432 -d postgres
 
 # pgadmin
 docker run -p 5433:80 \

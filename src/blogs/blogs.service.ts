@@ -7,17 +7,16 @@ import { CreateBlogDTO } from './dto/create-blog.dto';
 @Injectable()
 export class BlogsService {
 
-  private readonly blogs: Blog[] = [];
 
   constructor(@InjectRepository(Blog)private blogsRepository: Repository<Blog>) {
 
   }
 
-  findAll(): Promise<Blog[]> {
+  async findAll(): Promise<Blog[]> {
     return this.blogsRepository.find();
   }
 
-  create(createBlogDTO: CreateBlogDTO): Promise<Blog> {
+  async create(createBlogDTO: CreateBlogDTO): Promise<Blog> {
     const blog = new Blog();
     blog.title = createBlogDTO.title;
 

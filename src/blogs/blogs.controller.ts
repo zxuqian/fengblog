@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Public } from 'src/auth/auth.decorator';
 import { Blog } from './blog.entity';
 import { BlogsService } from './blogs.service';
 import { CreateBlogDTO } from './dto/create-blog.dto';
@@ -8,6 +9,7 @@ export class BlogsController {
 
   constructor(private blogsService: BlogsService) {}
 
+  @Public()
   @Get()
   findAll(): Promise<Blog[]> {
     return this.blogsService.findAll();

@@ -20,7 +20,8 @@ export class UsersService {
       ...createUserDTO,
       password: await bcrypt.hash(createUserDTO.password, 10)
     })
-    return this.userRepository.save(user);
+    const {password, ...createdUser} = await this.userRepository.save(user);
+    return this.userRepository.save(createdUser);
   }
   
 }

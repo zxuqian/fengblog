@@ -1,19 +1,32 @@
 import { Exclude } from "class-transformer";
 import { Post } from "../../posts/entities/post.entity";
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn("uuid")
-  id: number;
+  id: string;
   @Column()
   username: string;
 
   @Exclude()
   @Column()
   password: string;
-  @OneToMany(() => Post, post => post.user)
-  posts: Post[]
+
+  @Column()
+  mobilePhone: string;
+
+  @Column()
+  email: string;
+
+  @Column()
+  wechat: string;
+
+  @Column()
+  github: string;
+
+  @Column()
+  avatar: string;
 
   @CreateDateColumn()
   createdAt: Date;

@@ -4,19 +4,19 @@ import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Up
 @Entity()
 export class Post {
   @PrimaryGeneratedColumn("uuid")
-  id: number;
+  id: string;
 
   @Column()
   title: string;
 
   @Column({nullable: true})
-  publishDate: Date;
-
-  @Column({nullable: true})
   isDraft: boolean;
 
-  @ManyToOne(() => User, user => user.posts)
-  user: User
+  @ManyToOne(() => User)
+  user: User;
+
+  @ManyToOne(() => Comment)
+  comments: Comment[];
 
   @CreateDateColumn()
   createdAt: Date;

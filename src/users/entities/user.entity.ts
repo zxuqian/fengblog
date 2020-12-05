@@ -16,16 +16,17 @@ export class User {
   @Column()
   mobilePhone: string;
 
-  @Column()
+  
+  @Column({nullable : true})
   email: string;
 
-  @Column()
+  @Column({nullable : true})
   wechat: string;
 
-  @Column()
+  @Column({nullable : true})
   github: string;
 
-  @Column()
+  @Column({nullable : true})
   avatar: string;
 
   @CreateDateColumn()

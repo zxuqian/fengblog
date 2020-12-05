@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Request } from '@nestjs/common';
-import { Public } from 'src/auth/auth.decorator';
+import { Public } from '../auth/auth.decorator';
 import { Post as BlogPost } from './entities/post.entity';
 import { PostsService } from './posts.service';
 import { CreatePostDTO } from './dto/create-post.dto';

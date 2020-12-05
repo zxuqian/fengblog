@@ -4,10 +4,8 @@ import { AppService } from './app.service';
 import {TypeOrmModule} from '@nestjs/typeorm'
 import { Connection } from 'typeorm';
 import { PostsModule } from './posts/posts.module';
-import { Post } from './posts/entities/post.entity';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { User } from './users/entities/user.entity';
 import { CommentsModule } from './comments/comments.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 

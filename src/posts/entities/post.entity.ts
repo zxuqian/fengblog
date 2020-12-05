@@ -1,5 +1,6 @@
 import { User } from "../../users/entities/user.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Comment } from "../../comments/entities/comment.entity";
 
 @Entity()
 export class Post {

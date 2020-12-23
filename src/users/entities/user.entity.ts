@@ -2,7 +2,7 @@ import { Exclude } from "class-transformer";
 import { Post } from "../../posts/entities/post.entity";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity({name: "person"})
 export class User {
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -13,20 +13,19 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({nullable: true})
   mobilePhone: string;
 
-  
-  @Column({nullable : true})
+  @Column({nullable: true})
   email: string;
 
-  @Column({nullable : true})
+  @Column({nullable: true})
   wechat: string;
 
-  @Column({nullable : true})
+  @Column({nullable: true})
   github: string;
 
-  @Column({nullable : true})
+  @Column({nullable: true})
   avatar: string;
 
   @CreateDateColumn()

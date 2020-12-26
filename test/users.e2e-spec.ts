@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 
-describe('PostController (e2e)', () => {
+describe('UserController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -18,15 +18,20 @@ describe('PostController (e2e)', () => {
   // beforeEach(async () => {
   //   request(app.getHttpServer).post("/auth").send({username: ""})
   // })
-
-  it('/user (POST) create a user', () => {
+describe('/user (POST)', () => {
+  it('should create a user', () => {
     const user = {username: "user1", password: "123456", mobilePhone: "18616661666"};
     return request(app.getHttpServer())
       .post('/users')
+      .set("Accept", 'application/json')
       .send(user)
+      .expect('Content-Type', /json/)
       .expect(201)
-      .then(res => {
-        expect(res.body.mobilePhone).toEqual(user.mobilePhone)
-      });
+  });
+
+})
+  
+  afterAll(async () => {
+    await app.close();
   });
 });

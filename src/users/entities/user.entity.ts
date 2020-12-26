@@ -1,5 +1,5 @@
 import { Exclude } from "class-transformer";
-import { Post } from "../../posts/entities/post.entity";
+// import { Post } from "../../posts/entities/post.entity";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({name: "person"})

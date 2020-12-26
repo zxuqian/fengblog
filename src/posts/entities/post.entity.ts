@@ -1,5 +1,5 @@
 import { User } from "../../users/entities/user.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Comment } from "../../comments/entities/comment.entity";
 
 @Entity()
@@ -11,12 +11,15 @@ export class Post {
   title: string;
 
   @Column({nullable: true})
+  content: string;
+
+  @Column({nullable: true})
   isDraft: boolean;
 
   @ManyToOne(() => User)
   user: User;
 
-  @ManyToOne(() => Comment)
+  @OneToMany(() => Comment, comment => comment.post)
   comments: Comment[];
 
   @CreateDateColumn()

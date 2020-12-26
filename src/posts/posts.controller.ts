@@ -16,15 +16,22 @@ export class PostsController {
     return this.postsService.findAll();
   }
 
-  @Post()
-  create(@Body() createPostDTO: CreatePostDTO, @Request() req): Promise<BlogPost> {
-    return this.postsService.create(createPostDTO, req.user);
-  }
-
   @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.postsService.findOne(id);
+  }
+
+  // @Public()
+  // @Get(':id/comments')
+  // async findAllCommentsByPostId(@Param('id') id: string) {
+  //   const post = await this.postsService.findAllCommentsByPostId(id);
+  //   return post.comments;
+  // }
+
+  @Post()
+  create(@Body() createPostDTO: CreatePostDTO, @Request() req): Promise<BlogPost> {
+    return this.postsService.create(createPostDTO, req.user);
   }
 
   @Put(':id')

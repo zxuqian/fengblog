@@ -11,7 +11,7 @@ export class UsersService {
   constructor(@InjectRepository(User) private userRepository: Repository<User>) {}
 
   async findOne(username: string): Promise<User | undefined> {
-    return this.userRepository.findOne({where: {
+    return await this.userRepository.findOne({where: {
       username
     }});
   }
@@ -22,19 +22,19 @@ export class UsersService {
       password: await bcrypt.hash(createUserDTO.password, 10)
     })
     const {password, ...createdUser} = await this.userRepository.save(user);
-    return this.userRepository.save(createdUser);
+    return await this.userRepository.save(createdUser);
   }
 
-  findAll(): Promise<User[]> {
-    return this.userRepository.find();
+  async findAll(): Promise<User[]> {
+    return await this.userRepository.find();
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    this.userRepository.update(id, updateUserDto)
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    return await this.userRepository.update(id, updateUserDto)
   }
 
-  remove(id: string) {
-    this.userRepository.delete(id);
+  async remove(id: string) {
+    return await this.userRepository.delete(id);
   }
   
 }

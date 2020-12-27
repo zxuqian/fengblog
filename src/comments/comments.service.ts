@@ -20,26 +20,26 @@ export class CommentsService {
     const post = await this.postsService.findOne(postId);
     comment.post = post;
     comment.user = user;
-    return this.commentsRepository.save(comment);
+    return await this.commentsRepository.save(comment);
   }
 
-  findAll(): Promise<Comment[]> {
-    return this.commentsRepository.find();
+  async findAll(): Promise<Comment[]> {
+    return await this.commentsRepository.find();
   }
 
-  findOne(id: string): Promise<Comment> {
-    return this.commentsRepository.findOne(id);
+  async findOne(id: string): Promise<Comment> {
+    return await this.commentsRepository.findOne(id);
   }
 
   // findAllByPostId(postId: string): Promise<Comment[]> {
   //   return this.commentsRepository.find({where: {post: {id: postId}}})
   // }
 
-  update(id: string, updateCommentDto: UpdateCommentDto) {
-    this.commentsRepository.update(id, updateCommentDto);
+  async update(id: string, updateCommentDto: UpdateCommentDto) {
+    return await this.commentsRepository.update(id, updateCommentDto);
   }
 
-  remove(id: string) {
-    this.commentsRepository.delete(id);
+  async remove(id: string) {
+    return await this.commentsRepository.delete(id);
   }
 }

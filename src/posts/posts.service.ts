@@ -9,17 +9,16 @@ import { UpdatePostDto } from './dto/update-post.dto';
 @Injectable()
 export class PostsService {
 
-
   constructor(@InjectRepository(Post) private postsRepository: Repository<Post>) {
 
   }
 
   async findAll(): Promise<Post[]> {
-    return this.postsRepository.find();
+    return await  this.postsRepository.find();
   }
 
-  findOne(id: string): Promise<Post> {
-    return this.postsRepository.findOne(id, {relations: ['comments']})
+  async findOne(id: string): Promise<Post> {
+    return await  this.postsRepository.findOne(id, {relations: ['comments']})
   }
 
   // findAllCommentsByPostId(id: string): Promise<Post> {
@@ -28,16 +27,16 @@ export class PostsService {
 
   async create(createPostDTO: CreatePostDTO, user: User): Promise<Post> {
     const post = this.postsRepository.create({...createPostDTO, user})
-    return this.postsRepository.save(post);
+    return await  this.postsRepository.save(post);
   }
 
   
 
-  update(id: string, updatePostDto: UpdatePostDto) {
-    this.postsRepository.update(id, updatePostDto)
+  async update(id: string, updatePostDto: UpdatePostDto) {
+    return await  this.postsRepository.update(id, updatePostDto)
   }
 
-  remove(id: string) {
-    this.postsRepository.delete(id);
+  async remove(id: string) {
+    return await this.postsRepository.delete(id);
   }
 }

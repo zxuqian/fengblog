@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpCode, Param, ParseUUIDPipe, Post, Put } from '@nestjs/common';
+import { HttpErrorByCode } from '@nestjs/common/utils/http-error-by-code.util';
 import { Public } from '../auth/auth.decorator';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -12,22 +13,23 @@ export class UsersController {
 
   @Get()
   async findAll() {
-    return this.usersService.findAll();
+    return await this.usersService.findAll();
   }
 
   @Public()
   @Post()
   async create(@Body() createUserDTO: CreateUserDTO): Promise<User> {
-    return this.usersService.create(createUserDTO);
+    return await this.usersService.create(createUserDTO);
   }
 
   @Put(':id')
-  update(@Param('id') id, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(id, updateUserDto);
+  async update(@Param('id', new ParseUUIDPipe()) id: string, @Body() updateUserDto: UpdateUserDto) {
+    return await this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    this.usersService.remove(id);
+  @HttpCode(204)
+  async remove(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.usersService.remove(id);
   }
 }

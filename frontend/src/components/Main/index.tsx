@@ -1,4 +1,4 @@
-import { Breadcrumb, Layout, Menu, PageHeader } from "antd";
+import { Breadcrumb, Layout, Menu, PageHeader, Space } from "antd";
 import React, { useState } from "react";
 import {
   PieChartOutlined,
@@ -10,6 +10,7 @@ import {
 import { Link, Route, Switch } from "react-router-dom";
 import Dashboard from "pages/Dashboard";
 import PostManagement from "pages/PostManagement";
+import { routes } from "./routes";
 
 interface MainProps {
   children?: React.ReactNode;
@@ -18,7 +19,7 @@ interface MainProps {
 function Main({ children }: MainProps) {
   const [collapsed, setCollapsed] = useState(false);
 
-  const { Sider, Content, Header, Footer } = Layout;
+  const { Sider, Content, Footer } = Layout;
   const { SubMenu } = Menu;
 
   return (
@@ -32,30 +33,32 @@ function Main({ children }: MainProps) {
             background: "rgba(255, 255, 255, 0.3)",
           }}
         />
+
         <Menu
           theme="dark"
           defaultSelectedKeys={["postList"]}
           defaultOpenKeys={["postMenu"]}
           mode="inline"
         >
-          <Menu.Item key="dashBoardMenu" icon={<PieChartOutlined />}>
-            <Link to="/">控制面板</Link>
-          </Menu.Item>
-          <SubMenu key="postMenu" icon={<BookOutlined />} title="博客管理">
-            <Menu.Item key="postList" icon={<DesktopOutlined />}>
-              <Link to="/posts">博客列表</Link>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key="commentMenu"
-            icon={<CommentOutlined />}
-            title="评论管理"
-          >
-            <Menu.Item key="commentList">评论列表</Menu.Item>
-          </SubMenu>
-          <SubMenu key="commentMenu" icon={<UserOutlined />} title="用户管理">
-            <Menu.Item key="commentList">用户列表</Menu.Item>
-          </SubMenu>
+          {routes.map((route) => {
+            if (route.children) {
+              return (
+                <SubMenu key={route.key} icon={route.icon} title={route.name}>
+                  {route.children.map((subRoute) => (
+                    <Menu.Item key={subRoute.key} icon={subRoute.icon}>
+                      <Link to={subRoute.to || ""}>{subRoute.name}</Link>
+                    </Menu.Item>
+                  ))}
+                </SubMenu>
+              );
+            } else {
+              return (
+                <Menu.Item key={route.key} icon={route.icon}>
+                  <Link to={route.to || ""}>{route.name}</Link>
+                </Menu.Item>
+              );
+            }
+          })}
         </Menu>
       </Sider>
       <Layout className="site-layout">
@@ -70,7 +73,12 @@ function Main({ children }: MainProps) {
           }}
           style={{ backgroundColor: "#ffffff" }}
         />
-        <Content style={{ margin: "0 16px" }}>
+        <Content
+          style={{
+            margin: "16px",
+            padding: "24px",
+          }}
+        >
           <Switch>
             <Route path="/posts" exact>
               <PostManagement />
@@ -81,7 +89,7 @@ function Main({ children }: MainProps) {
           </Switch>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          Ant Design ©2018 Created by Ant UED
+          FengBlog ©2020 Created by Xuqian Zhang（峰华前端工程师）
         </Footer>
       </Layout>
     </Layout>

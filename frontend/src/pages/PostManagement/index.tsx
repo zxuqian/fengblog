@@ -1,9 +1,13 @@
 import React from "react";
-import { Table } from "antd";
+import { Card, Table, Typography } from "antd";
 import { columns, demoPosts } from "./columns";
 
 function PostManagement() {
-  return <Table columns={columns} dataSource={demoPosts} />;
+  return (
+    <Card>
+      <Table columns={columns} dataSource={demoPosts} />
+    </Card>
+  );
 }
 
 export default PostManagement;

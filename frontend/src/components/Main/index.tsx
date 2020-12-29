@@ -76,7 +76,6 @@ function Main({ children }: MainProps) {
         <Content
           style={{
             margin: "16px",
-            padding: "24px",
           }}
         >
           <Switch>

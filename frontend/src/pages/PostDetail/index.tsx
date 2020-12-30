@@ -1,12 +1,12 @@
 import { LayoutContent } from "components/MainLayout";
 import React from "react";
 
-function Dashboard() {
+function PostDetail() {
   return (
     <LayoutContent>
-      <div />
+      <div>Hello world</div>
     </LayoutContent>
   );
 }
 
-export default Dashboard;
+export default PostDetail;

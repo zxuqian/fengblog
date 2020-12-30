@@ -1,6 +1,16 @@
 import { Space } from "antd";
+import { ColumnsType } from "antd/lib/table";
+import { Link } from "react-router-dom";
 
-export const columns = [
+export interface PostType {
+  id: number;
+  title: string;
+  author: string;
+  createdAt: string;
+  status: string;
+}
+
+export const columns: ColumnsType<PostType> = [
   {
     title: "文章标题",
     dataIndex: "title",
@@ -23,11 +33,11 @@ export const columns = [
   },
   {
     title: "操作",
-    render: () => <a>详情</a>,
+    render: (_text, record) => <Link to={`/posts/${record.id}`}>详情</Link>,
   },
 ];
 
-export const demoPosts = [
+export const demoPosts: PostType[] = [
   {
     id: 1,
     title: "文章标题 1",

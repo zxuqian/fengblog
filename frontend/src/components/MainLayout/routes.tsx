@@ -4,14 +4,11 @@ import {
   PieChartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import Dashboard from "pages/Dashboard";
-import PostManagement from "pages/PostManagement";
 
 interface route {
   key: string;
   name: string;
   to?: string;
-  component?: JSX.Element;
   children?: route[];
   icon?: JSX.Element;
 }
@@ -21,7 +18,6 @@ export const routes: route[] = [
     name: "控制面板",
     to: "/",
     key: "dashboardMenu",
-    component: <Dashboard />,
     icon: <PieChartOutlined />,
   },
   {
@@ -33,7 +29,6 @@ export const routes: route[] = [
         key: "postListMenu",
         name: "博客列表",
         to: "/posts",
-        component: <PostManagement />,
       },
     ],
   },

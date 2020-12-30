@@ -1,13 +1,12 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Main from "components/Main";
 import { BrowserRouter as Router } from "react-router-dom";
+import MainLayout from "components/MainLayout";
 
 function App() {
   return (
     <Router>
-      <Main />
+      <MainLayout />
     </Router>
   );
 }

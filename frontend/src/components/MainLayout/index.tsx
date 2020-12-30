@@ -1,25 +1,21 @@
-import { Breadcrumb, Layout, Menu, PageHeader, Space } from "antd";
-import React, { useState } from "react";
-import {
-  PieChartOutlined,
-  DesktopOutlined,
-  UserOutlined,
-  BookOutlined,
-  CommentOutlined,
-} from "@ant-design/icons";
-import { Link, Route, Switch } from "react-router-dom";
-import Dashboard from "pages/Dashboard";
-import PostManagement from "pages/PostManagement";
+import { Layout, Menu } from "antd";
+import React, { Fragment, useState } from "react";
+import { Link } from "react-router-dom";
 import { routes } from "./routes";
+import { Route, Switch } from "react-router-dom";
+import PostManagement from "pages/PostManagement";
+import PostDetail from "pages/PostDetail";
+import Dashboard from "pages/Dashboard";
 
-interface MainProps {
+interface LayoutProps {
+  header?: React.ReactNode;
   children?: React.ReactNode;
 }
 
-function Main({ children }: MainProps) {
+function MainLayout() {
   const [collapsed, setCollapsed] = useState(false);
 
-  const { Sider, Content, Footer } = Layout;
+  const { Sider, Footer } = Layout;
   const { SubMenu } = Menu;
 
   return (
@@ -62,31 +58,17 @@ function Main({ children }: MainProps) {
         </Menu>
       </Sider>
       <Layout className="site-layout">
-        <PageHeader
-          title="博客列表"
-          subTitle="用于管理博客"
-          breadcrumb={{
-            routes: [
-              { path: "", breadcrumbName: "博客管理" },
-              { path: "", breadcrumbName: "博客列表" },
-            ],
-          }}
-          style={{ backgroundColor: "#ffffff" }}
-        />
-        <Content
-          style={{
-            margin: "16px",
-          }}
-        >
-          <Switch>
-            <Route path="/posts" exact>
-              <PostManagement />
-            </Route>
-            <Route path="/" exact>
-              <Dashboard />
-            </Route>
-          </Switch>
-        </Content>
+        <Switch>
+          <Route path="/posts" exact>
+            <PostManagement />
+          </Route>
+          <Route path="/posts/:id" exact>
+            <PostDetail />
+          </Route>
+          <Route path="/" exact>
+            <Dashboard />
+          </Route>
+        </Switch>
         <Footer style={{ textAlign: "center" }}>
           FengBlog ©2020 Created by Xuqian Zhang（峰华前端工程师）
         </Footer>
@@ -95,4 +77,20 @@ function Main({ children }: MainProps) {
   );
 }
 
-export default Main;
+export const LayoutContent = ({ header, children }: LayoutProps) => {
+  const { Content } = Layout;
+  return (
+    <Fragment>
+      {header}
+      <Content
+        style={{
+          margin: "16px",
+        }}
+      >
+        {children}
+      </Content>
+    </Fragment>
+  );
+};
+
+export default MainLayout;

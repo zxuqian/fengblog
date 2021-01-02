@@ -33,7 +33,7 @@ export const columns: ColumnsType<PostType> = [
   },
   {
     title: "操作",
-    render: (_text, record) => <Link to={`/posts/${record.id}`}>详情</Link>,
+    render: (_text, record) => <Link to={`/posts/${record.id}`}>编辑</Link>,
   },
 ];
 

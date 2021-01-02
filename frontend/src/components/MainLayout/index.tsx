@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { routes } from "./routes";
 import { Route, Switch } from "react-router-dom";
 import PostManagement from "pages/PostManagement";
-import PostDetail from "pages/PostDetail";
 import Dashboard from "pages/Dashboard";
+import PostEditing from "pages/PostEditing";
 
 interface LayoutProps {
   header?: React.ReactNode;
@@ -63,7 +63,7 @@ function MainLayout() {
             <PostManagement />
           </Route>
           <Route path="/posts/:id" exact>
-            <PostDetail />
+            <PostEditing />
           </Route>
           <Route path="/" exact>
             <Dashboard />
